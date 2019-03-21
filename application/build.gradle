@@ -8,12 +8,26 @@
 plugins {
     id 'java'
     id 'application'
+    id 'jacoco'
 }
 
 repositories {
     mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
 }
 
 application {
     mainClassName = 'Regex'
+}
+
+jacocoTestReport {
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: 'Regex.class')
+        }))
+    }
 }
