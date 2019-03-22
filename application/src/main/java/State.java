@@ -53,5 +53,5 @@ public class State {
 
     public void setRight(State r) {
         this.right.state = r;
-    }
+    } 
 }
