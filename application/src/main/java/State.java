@@ -15,6 +15,10 @@ public class State {
         this(left, right, leftS, rightS, false);
     }
 
+    public State() {
+        this('ʒ', 'ʒ', null, null);
+    }
+
     public boolean check(String s, int i) {
         boolean any = false;
 

@@ -95,6 +95,22 @@ public class ParserTest {
         assertFalse(s.check("bbb", 0));
     }
 
+    @Test
+    public void nestedGroupingsWithUnionAndKleene() {
+        State s = parse("a((x|y)*|b)");
+        assertTrue(s.check("a", 0));
+        assertTrue(s.check("ab", 0));
+        assertTrue(s.check("ax", 0));
+        assertTrue(s.check("ay", 0));
+        assertTrue(s.check("axxx", 0));
+        assertTrue(s.check("ayyy", 0));
+        assertTrue(s.check("axyxxyxyx", 0));
+        assertFalse(s.check("abb", 0));
+        assertFalse(s.check("", 0));
+        assertFalse(s.check("axb", 0));
+        assertFalse(s.check("b", 0));
+
+    }
 
     private State parse(String s) {
         return Parser.parse(s);

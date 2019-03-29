@@ -4,7 +4,7 @@ public class Parser {
 
 
     public static State parse(String input) {
-        State first = new State(e, e, null, null);
+        State first = new State();
         State last = parse(first, null, 0, input);
         last.left = new Transition(e, new State(e, e, null, null, true));
         return first;
@@ -13,18 +13,18 @@ public class Parser {
 
     public static State parse(State currentS, State previous, int i, String input) {
         State localFirst = currentS;
-        State ns = new State(e, e, null, null);
+        State ns = new State();
         localFirst.setLeft(ns);
         previous = currentS;
         currentS = ns;
 
-        State localLast = new State(e, e, null, null);
+        State localLast = new State();
         while (i < input.length()) {
             char c = input.charAt(i);
             State newState;
             switch (c) {
                 case '*':
-                    newState = new State(e, e, null, null);
+                    newState = new State();
                     previous.setRight(newState);
                     State temp = new State(previous.left.input, e, previous.left.state, null);
                     previous.left = new Transition(e, temp);
@@ -35,7 +35,7 @@ public class Parser {
                     break;
                 case '|':
                     currentS.setLeft(localLast);
-                    newState = new State(e, e, null, null);
+                    newState = new State();
                     localFirst.setRight(newState);
                     previous = localFirst;
                     currentS = newState;
@@ -54,7 +54,7 @@ public class Parser {
                         }
 
                         if (braces == 0) {
-                            newState = new State(e, e, null, null);
+                            newState = new State();
                             currentS.setLeft(newState);
                             previous = currentS;
                             currentS = newState;
@@ -67,7 +67,7 @@ public class Parser {
                     break;
                 default:
                     previous = currentS;
-                    newState = new State(e, e, null, null);
+                    newState = new State();
                     currentS.left = new Transition(c, newState);
                     currentS = newState;
             }
@@ -78,6 +78,4 @@ public class Parser {
 
         return localLast;
     }
-
-
 }
