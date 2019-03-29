@@ -1,50 +1,69 @@
 
 public class Parser {
-    String input;
-    int start = 0;
-    int current = 0;
-
-    private final char e = 'ʒ';
-
-    State first = new State(e, e, null, null);
+    private final static char e = 'ʒ';
 
 
-    public Parser(String input) {
-        this.input = input;
+    public static State parse(String input) {
+        State first = new State(e, e, null, null);
+        State last = parse(first, null, 0, input);
+        last.left = new Transition(e, new State(e, e, null, null, true));
+        return first;
     }
 
-    public State parse() {
-        return parse(first, null, first);
-    }
 
-    public State parse(State currentS, State previous, State localFirst) {
-        State end = new State (e, e, null, null, true);
-        
-        while (current < input.length()) {
-            char c = input.charAt(current);
+    public static State parse(State currentS, State previous, int i, String input) {
+        State localFirst = currentS;
+        State ns = new State(e, e, null, null);
+        localFirst.setLeft(ns);
+        previous = currentS;
+        currentS = ns;
+
+        State localLast = new State(e, e, null, null);
+        while (i < input.length()) {
+            char c = input.charAt(i);
             State newState;
             switch (c) {
-                case '*':          
-                    char letter = input.charAt(current - 1);
-                    previous.left = new Transition(e, currentS);
-                    currentS.left = new Transition(e, null);
-
-                    newState = new State(e, letter, null, currentS);
-                    
+                case '*':
+                    newState = new State(e, e, null, null);
+                    previous.setRight(newState);
+                    State temp = new State(previous.left.input, e, previous.left.state, null);
+                    previous.left = new Transition(e, temp);
                     currentS.setLeft(newState);
+                    currentS.setRight(previous.left.state);
                     previous = currentS;
                     currentS = newState;
-                    
                     break;
                 case '|':
-                    State newLocalFirst = new State(e, e, null, null);
-                    localFirst.right = new Transition(e, localFirst);
+                    currentS.setLeft(localLast);
+                    newState = new State(e, e, null, null);
+                    localFirst.setRight(newState);
+                    previous = localFirst;
+                    currentS = newState;
+                    localFirst = newState;
+                    break;
+                case '(':
+                    int i0 = i;
+                    int braces = 1;
+                    i++;
+                    while (i < input.length()) {
+                        char ch = input.charAt(i);
+                        if (ch == ')') {
+                            braces--;
+                        } else if (ch == '(') {
+                            braces++;
+                        }
 
-                    current++;
+                        if (braces == 0) {
+                            newState = new State(e, e, null, null);
+                            currentS.setLeft(newState);
+                            previous = currentS;
+                            currentS = newState;
 
-                    newState = parse(newLocalFirst, localFirst, newLocalFirst);
-                    localFirst.right = new Transition(e, newState);
-
+                            currentS = parse(currentS, previous, 0, input.substring(i0+1, i));
+                            break;
+                        }
+                        i++;
+                    }
                     break;
                 default:
                     previous = currentS;
@@ -52,12 +71,12 @@ public class Parser {
                     currentS.left = new Transition(c, newState);
                     currentS = newState;
             }
-            current++;
-        }
-        
+            i++;
 
-        currentS.left = new Transition(e, end);
-        return localFirst;
+        }
+        currentS.setLeft(localLast);
+
+        return localLast;
     }
 
 

@@ -25,7 +25,7 @@ public class State {
             c = s.charAt(i);
         } else if (!left.hasNext() && !right.hasNext()) {
             return accept;
-        }    
+        }
 
         if (left.hasNext()) {
             if (left.isEpsilon()) {
@@ -42,7 +42,7 @@ public class State {
                 any = any || right.state.check(s, i+1);
             }
         }
-        
+
         return any;
 
     }
@@ -53,5 +53,5 @@ public class State {
 
     public void setRight(State r) {
         this.right.state = r;
-    } 
+    }
 }

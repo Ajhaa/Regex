@@ -23,7 +23,7 @@ public class ParserTest {
         State s = parse("abc|dge");
         assertTrue(s.check("abc", 0));
         assertTrue(s.check("dge", 0));
-        assertFalse(s.check("asdf", 0));        
+        assertFalse(s.check("asdf", 0));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class ParserTest {
         assertTrue(s.check("", 0));
         assertTrue(s.check("s", 0));
         assertTrue(s.check("sss", 0));
-        assertFalse(s.check("ssddfsa", 0));       
+        assertFalse(s.check("ssddfsa", 0));
     }
 
     @Test
@@ -56,11 +56,47 @@ public class ParserTest {
         assertTrue(s.check("c", 0));
         assertTrue(s.check("dddc", 0));
         assertFalse(s.check("aaaddd", 0));
-        assertFalse(s.check("ccccbb", 0));      
+        assertFalse(s.check("ccccbb", 0));
+    }
+
+    @Test
+    public void groupingWorksWithConcat() {
+        State s = parse("a(bc)");
+        assertTrue(s.check("abc", 0));
+    }
+
+    @Test
+    public void groupingWithKleeneStar() {
+        State s = parse("a(bc)*");
+        assertTrue(s.check("a", 0));
+        assertTrue(s.check("abc", 0));
+        assertTrue(s.check("abcbc", 0));
+        assertFalse(s.check("abbcc", 0));
+    }
+
+    @Test
+    public void groupingWithUnion() {
+        State s = parse("a(b|c)");
+        assertTrue(s.check("ab", 0));
+        assertTrue(s.check("ac", 0));
+        assertFalse(s.check("a", 0));
+        assertFalse(s.check("abc", 0));
+    }
+
+    @Test
+    public void kleeneInGroupWithUnion() {
+        State s = parse("a(b*|c)");
+        assertTrue(s.check("ab", 0));
+        assertTrue(s.check("a", 0));
+        assertTrue(s.check("ac", 0));
+        assertTrue(s.check("abbbbb", 0));
+        assertFalse(s.check("c", 0));
+        assertFalse(s.check("", 0));
+        assertFalse(s.check("bbb", 0));
     }
 
 
     private State parse(String s) {
-        return new Parser(s).parse();
+        return Parser.parse(s);
     }
 }
