@@ -1,10 +1,23 @@
 package regex.nfa;
 
+
+/**
+ * Representation of a single state in an NFA
+ * Has a maximum of two transitions to other states
+ */
 public class State {
     public Transition left;
     public Transition right;
     public boolean accept;
 
+    /**
+     * 
+     * @param left letter of left transition
+     * @param right letter of right transition
+     * @param leftS state in left transition
+     * @param rightS state in right transition
+     * @param accept is true, the state is accepting
+     */
     public State(char left, char right, State leftS, State rightS, boolean accept) {
         this.left = new Transition(left, leftS);
         this.right = new Transition(right, rightS);
@@ -19,6 +32,12 @@ public class State {
         this('ʒ', 'ʒ', null, null);
     }
 
+    /**
+     * Checks a string recursively against a NFA starting from this state
+     * @param s string to test
+     * @param i index of the string
+     * @return
+     */
     public boolean check(String s, int i) {
         boolean any = false;
 
