@@ -21,13 +21,13 @@ dependencies {
 }
 
 application {
-    mainClassName = 'Regex'
+    mainClassName = 'regex.Main'
 }
 
 jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: 'Regex.class')
+            fileTree(dir: it, exclude: 'Main.class')
         }))
     }
 }

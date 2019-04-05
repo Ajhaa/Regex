@@ -1,7 +1,8 @@
+package regex;
 
-import java.util.Arrays;
+import regex.nfa.State;
 
-public class Regex {
+public class Main {
     public static void main(String[] args) {
         if (args.length == 0) {
             System.out.println("Needs arghs");

@@ -1,3 +1,7 @@
+package regex;
+
+import regex.nfa.State;
+import regex.nfa.Transition;
 
 public class Parser {
     private final static char e = 'ʒ';

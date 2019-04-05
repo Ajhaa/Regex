@@ -1,3 +1,5 @@
+package regex.nfa;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
@@ -55,14 +57,14 @@ public class StateTest {
     }
 
     // equivalent to regex a*b*
-    @Test 
+    @Test
     public void twoKleenes() {
-        State a = new State('a', 'ʒ', null, null, false);    
+        State a = new State('a', 'ʒ', null, null, false);
         State b = new State('ʒ', 'ʒ', a, null, false);
 
         a.setLeft(b);
 
-        State d = new State('b', 'ʒ', null, f, false);  
+        State d = new State('b', 'ʒ', null, f, false);
         State c = new State('ʒ', 'ʒ', d, null, false);
 
         a.setRight(c);

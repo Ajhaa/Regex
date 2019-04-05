@@ -1,9 +1,9 @@
-import java.util.HashMap;
+package regex.nfa;
 
 public class State {
-    Transition left;
-    Transition right;
-    boolean accept;
+    public Transition left;
+    public Transition right;
+    public boolean accept;
 
     public State(char left, char right, State leftS, State rightS, boolean accept) {
         this.left = new Transition(left, leftS);
@@ -21,8 +21,6 @@ public class State {
 
     public boolean check(String s, int i) {
         boolean any = false;
-
-        //System.out.println("i: " + i + " current: " + this + " l: " + left.input + " " + left.state + " r: "+ right.input + " " + right.state);
 
         char c = 'ʒ';
         if (i < s.length()) {

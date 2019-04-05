@@ -1,7 +1,8 @@
+package regex.nfa;
 
 public class Transition {
-    char input;
-    State state;
+    public char input;
+    public State state;
 
     public Transition(char input, State state) {
         this.input = input;
