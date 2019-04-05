@@ -2,6 +2,7 @@ package regex;
 
 import regex.nfa.State;
 import regex.nfa.Transition;
+import regex.nfa.NFA;
 
 public class Parser {
     private final static char e = 'ʒ';
@@ -81,5 +82,10 @@ public class Parser {
         currentS.setLeft(localLast);
 
         return localLast;
+    }
+
+    private static NFA parseNFA() {
+        NFA beginning = NFA.root();
+
     }
 }
