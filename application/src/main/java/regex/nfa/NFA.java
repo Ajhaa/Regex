@@ -3,6 +3,7 @@ package regex.nfa;
 public class NFA {
     public State first;
     public State last;
+    public NFA inner;
 
     private static char e = 'ʒ';
 
@@ -17,8 +18,44 @@ public class NFA {
 
     public NFA(char c) {
         this();
-        NFA nfa = new NFA();
-        nfa.first.left = new Transition(c, nfa.last);
+        this.first.left = new Transition(c, this.last);
+    }
+
+    public void connectInner(NFA nfa) {
+        if (inner == null) {
+            this.inner = nfa;
+            this.first.left = new Transition(e, nfa.first);
+        } else {
+            this.inner.last.left = new Transition(e, nfa.first);
+            this.inner = nfa;
+        }
+    }
+
+    public void branch(NFA nfa) {
+        this.inner = nfa;
+        this.first.right = new Transition(e, nfa.first);
+        nfa.last.left = new Transition(e, this.last);
+    }
+
+    public void connectToLast() {
+        if (inner != null) {
+            inner.last.left = new Transition(e, this.last);
+        }
+    }
+
+    /**
+     * WRaps an NFA into a kleene star
+     */
+    public void makeKleene() {
+        State temp = new State(first.left, first.right);
+        State newLast = new State();
+
+        first.left = new Transition(e, temp);
+        first.right = new Transition(e, newLast);
+
+        last.left = new Transition(e, newLast);
+        last.right = new Transition(e, temp);
+        last = newLast;
     }
 
     public static NFA root() {

@@ -1,5 +1,6 @@
 package regex;
 
+import regex.nfa.NFA;
 import regex.nfa.State;
 
 public class Main {
@@ -13,8 +14,10 @@ public class Main {
         String compared = args[1];
 
         State s1 = Parser.parse(regex);
+        NFA n = Parser.parseNFA(regex);
         //System.out.println(s.check(compared, 0));
         System.out.println(s1.check(compared, 0));
+        System.out.println(n.first.check(compared, 0));
     }
 
     public static String stateString(State st) {
