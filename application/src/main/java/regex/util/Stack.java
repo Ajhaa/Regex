@@ -8,7 +8,7 @@ public class Stack<T> {
 
 
     public void push(T item) {
-        Node<T> newNode = new Node(item);
+        Node<T> newNode = new Node<>(item);
         newNode.next = top;
         top = newNode;
         size++;
@@ -29,6 +29,7 @@ public class Stack<T> {
         if (top == null) {
             throw new EmptyStackException();
         }
+        
         return top.item;
     }
 

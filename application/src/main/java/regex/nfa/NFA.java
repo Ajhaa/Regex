@@ -34,7 +34,6 @@ public class NFA {
     public void branch(NFA nfa) {
         this.inner = nfa;
         this.first.right = new Transition(e, nfa.first);
-        nfa.last.left = new Transition(e, this.last);
     }
 
     public void connectToLast() {
@@ -43,8 +42,12 @@ public class NFA {
         }
     }
 
+    public boolean check(String s) {
+        return this.first.check(s, 0);
+    }
+
     /**
-     * WRaps an NFA into a kleene star
+     * Wraps an NFA into a kleene star
      */
     public void makeKleene() {
         State temp = new State(first.left, first.right);
