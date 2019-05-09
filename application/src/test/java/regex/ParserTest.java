@@ -2,7 +2,6 @@ package regex;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import org.junit.Before;
 
 import regex.nfa.State;
 
@@ -117,6 +116,6 @@ public class ParserTest {
     }
 
     private State parse(String s) {
-        return Parser.parse(s);
+        return Parser.parseNFA(s).first;
     }
 }

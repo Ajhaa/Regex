@@ -24,6 +24,12 @@ public class State {
         this.accept = accept;
     }
 
+    public State(Transition left, Transition right) {
+        this.left = left;
+        this.right = right;
+        this.accept = false;
+    }
+
     public State(char left, char right, State leftS, State rightS) {
         this(left, right, leftS, rightS, false);
     }

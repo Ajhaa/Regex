@@ -1,5 +1,6 @@
 .gradle
 .settings
 .project
+.idea
 build
 bin
