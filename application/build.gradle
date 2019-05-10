@@ -33,7 +33,7 @@ jar {
 jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: 'Main.class')
+            fileTree(dir: it, exclude: 'regex/Main.class')
         }))
     }
 }

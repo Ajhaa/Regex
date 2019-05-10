@@ -1,5 +1,7 @@
 package regex.nfa;
-
+/**
+ * Represents a transition between two states. Epsilon transitions are transitions with character ʒ
+ */
 public class Transition {
     public char input;
     public State state;

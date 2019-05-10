@@ -10,14 +10,13 @@ import java.util.Stack;
 
 public class Parser {
     // Shortcut for epsilon character
-    private final static char e = 'ʒ';
-
     private static Stack<NFA> stack;
     private static Stack<ParserState> state;
 
     /**
      *
      * Starts parsing an NFA by pushing the root NFA into the stack
+     * and initializing the two stacks used by the parser
      */
     public static NFA parseNFA(String input) {
         stack = new Stack<>();
@@ -65,7 +64,10 @@ public class Parser {
 
         return last;
     }
-
+    
+    /**
+     * Creates an union
+     */
     private static void unionize() {
         NFA outer = stack.peek();
         outer.connectToLast();

@@ -1,5 +1,9 @@
 package regex.nfa;
 
+/**
+ * Represents an NFA.
+ * Has two states, first and last, and an recursive inner NFA
+ */
 public class NFA {
     public State first;
     public State last;
@@ -36,12 +40,18 @@ public class NFA {
         this.first.right = new Transition(e, nfa.first);
     }
 
+    /**
+     * Connects the last state of the inner NFA to this NFA's last state with an epsilon connection
+     */
     public void connectToLast() {
         if (inner != null) {
             inner.last.left = new Transition(e, this.last);
         }
     }
 
+    /**
+     * Starts checking a string 
+     */
     public boolean check(String s) {
         return this.first.check(s, 0);
     }
@@ -61,6 +71,9 @@ public class NFA {
         last = newLast;
     }
 
+    /**
+     * Returns an NFA where the last state is accepting
+     */
     public static NFA root() {
         NFA nfa = new NFA();
         nfa.last.accept = true;

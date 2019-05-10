@@ -34,6 +34,9 @@ public class State {
         this(left, right, leftS, rightS, false);
     }
 
+    /**
+     * Creates a state with two epsilon transitions
+     */
     public State() {
         this('ʒ', 'ʒ', null, null);
     }
