@@ -17,8 +17,6 @@ public class Main {
         NFA n = Parser.parseNFA(regex);
         //System.out.println(n);
         System.out.println(n.check(compared));
-        times(regex);
-
     }
 
     public static String stateString(State st) {
