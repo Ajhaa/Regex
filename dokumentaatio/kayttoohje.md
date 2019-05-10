@@ -3,7 +3,7 @@
 Ohjelmaa ajetaan antamalla sille kaksi parametriä: regex ja testattava merkkijono.
 Ohjelma palauttaa true, jos regex hyväksyy merkkijonon, ja false jos ei hyväksy.
 
-Ohjelmaa voi ajaa joko kansiossa application Gradlen avulla, tai missä tahansa JAR-tiedostolla.
+Ohjelmaa voi ajaa joko kansiossa application Gradlen avulla, tai missä tahansa JAR-tiedostolla. Jar tiedosto löytyy projektin juuresta, bin-kansiosta.
 
 Gradlessa parametrit annetaan seuraavasti: `./gradlew run --args="<regex> <merkkijono>"`  
 JAR:ia käytettäessä parametrit annetaan seuraavasti: `java -jar Regex.jar <regex> <merkkijono>`
