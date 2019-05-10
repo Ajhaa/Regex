@@ -1,8 +1,10 @@
 # Toteutus
 
-Ohjelma koostuu tällä hetkellä Yksittäisistä NFA-tiloista. Parsiminen palauttaa NFA:n ensimmäisen tilan, 
-josta merkkijonoa lähdetään tarkistamaan. Aion kirjoittaa NFA:n paremmin niin, että aina tiedetään rekursiotason ensimmäinen
-ja viimeinen tila. Tämä helpottaa parsimista.
+Regex parsitaan ohjelmassa rekursiivisiksi NFA-olioiksi.
+Jokainen NFA:olio sisältää alkutilan, sisäkkäisen NFA:n ja lopputilan.
 
-Parsiminen ei ole tällä hetkellä luultavasti Thompsonin mukaista, mutta se hoitaa asiansa. Sekin kirjoitetaan uudelleen, kun
-NFA vaihtuu.
+Parsimisen alussa luodaan NFA, joka sisältää alkutilan ja lopputilan. Lopullisessa NFA:ssa on vain yksi lopputila, joka on tämä ensimmäisenä luodun NFA:n lopputila.
+
+Tilat on totetutettu State-olioina. State-olio sisältää kaksi siirtymää, jotka voivat olla epsilon-siirtymiä, normaaleja siirtymiä tai tyhjiä (ei siirtymää). Jokaisella tilalla on siis 0-2 siirtymää, joka riittää Thompsonin algoritmissa.
+
+Koska ohjelmassa ei luoda DFA:ta, parsimisaika on lineaarinen. Tämä kuitenkin aiheuttaa sen, että merkkijonon läpikäymisaika on O(mn), jossa m on regexin pituus, ja n merkkijonon pituus.
