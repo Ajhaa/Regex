@@ -1,4 +1,5 @@
 # Toteutus
+Tähän toteutukseen on implementoitu konkatenaatio, kleenin tähti, unioni ja ryhmittäminen.
 
 Regex parsitaan ohjelmassa rekursiivisiksi NFA-olioiksi.
 Jokainen NFA:olio sisältää alkutilan, sisäkkäisen NFA:n ja lopputilan.
