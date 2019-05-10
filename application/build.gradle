@@ -24,6 +24,12 @@ application {
     mainClassName = 'regex.Main'
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'regex.Main'
+    }
+}
+
 jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
