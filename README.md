@@ -6,7 +6,8 @@ Ohjelmaa käytetään application-kansiossa komennolla `./gradlew run --args "<r
 [Määrittelydokumentti](https://github.com/Ajhaa/Regex/blob/master/dokumentaatio/maarittely.md)  
 [Testausdokumentti](https://github.com/Ajhaa/Regex/blob/master/dokumentaatio/testausdokumentti.md)  
 [Toteutusdokumentti](https://github.com/Ajhaa/Regex/blob/master/dokumentaatio/toteutusdokumentti.md)  
-[Käyttöohje](https://github.com/Ajhaa/Regex/blob/master/dokumentaatio/kayttoohje.md)
+[Käyttöohje](https://github.com/Ajhaa/Regex/blob/master/dokumentaatio/kayttoohje.md)  
+[JavaDoc](https://github.com/Ajhaa/Regex/blob/master/dokumentaatio/javadoc/)
 
 ## Viikkoraportit
 [Viikko 1](https://github.com/Ajhaa/Regex/blob/master/dokumentaatio/viikkoraportit/viikko1.md)  
